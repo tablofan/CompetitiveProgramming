@@ -1,4 +1,6 @@
-##Broken Calculator
+## 991 Broken Calculator
+
+[https://leetcode.com/problems/broken-calculator/](https://leetcode.com/problems/broken-calculator/)
 
 Instead of doing the smart thing and thinking about the problem from the target backwards as explained [here](https://leetcode.com/problems/broken-calculator/discuss/1076042/Python-C%2B%2B-Explanation-with-illustration-why-we-should-work-with-Y-not-X), I chose to tackle the problem from the startValue upwards.
 
@@ -34,11 +36,11 @@ result = 15 (20-5)
 
 Breaking down the difference into powers of 2 is simply converting the int to binary.
 
-```
+```python
 def brokenCalc(self, startValue: int, target: int) -> int:
 ```
 Case 3
-```
+```python
     if startValue>target:
         return startValue - t
 ```
@@ -46,7 +48,7 @@ Case 3
 Calculate doublings and difference
 x is the value we get if we only apply doubling
 
-```
+```python
     doublings = 0
     x = startValue
     while x < target:
@@ -56,7 +58,7 @@ x is the value we get if we only apply doubling
 ```
 
 Final result res is the number of doublings and the number of decreases
-```
+```python
     res = doublings
     #Adds decreases that happen **before** doubling
     if diff[:-steps]:
