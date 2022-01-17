@@ -42,7 +42,7 @@ def brokenCalc(self, startValue: int, target: int) -> int:
 Case 3
 ```python
     if startValue>target:
-        return startValue - t
+        return startValue - target
 ```
 
 Calculate doublings and difference
