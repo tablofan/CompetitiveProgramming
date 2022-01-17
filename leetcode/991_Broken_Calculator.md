@@ -7,6 +7,7 @@ The general idea is double the startValue until it is greater than target, and i
 Now our task is to figure out when to decrease the value so that it minimizes our number of steps.
 
 **Case 1:**
+
 ![case1](https://i.imgur.com/t1ZwSZF.png)
 
 In this example, the difference from the number we get after only doubling and the target is 12. We can see that using the decrease operation at differnce times affects the results differently. The effect of reduction on the final number doubles after every doubling. Decreasing 14 to 13 decreases the final result by 8, since there are 3 doublings after the decrease. This corresponds to 2^3, and so the effects of decreases can be calculated by 2 to the power of the number of doublings remaining. Similarly, there are 2 doublings after the deduction from 26 to 25, and that decreases the final result by 2^2.
@@ -16,11 +17,13 @@ Therefore, any difference between the number we get from doubling to the target 
 The final result would be the number of doubles + the number of decreases.
 
 **Case 2:**
+
 ![case2](https://i.imgur.com/laZO199.png)
 
 In this case we have to decrease before we double. The difference of 12 (28-16) can be made up of 2^3 + 2^2. However we can't decrease 3 doublings before the end, since we don't double 3 times. In this case, the earlier we can decrease only affects the final result by 4 (2^2) every time. Therefore the difference can still be broken down into powers of 2, but any powers greater than 2^(max doubles) must be broken down into powers no greater than 2^(max doubles). Here we break the difference down into 3*2^2, meaning we decrease 3 times at 2 doublings before the end.
 
 **Case 3:**
+
 This is the case where the start is greater than the target. In this case the result is simply target - start.
 
 e.g. 
