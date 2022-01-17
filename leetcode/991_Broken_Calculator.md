@@ -70,4 +70,5 @@ Final result res is the number of doublings and the number of decreases
 ```
 
 Time: O(logn)
+
 Space: O(1)
