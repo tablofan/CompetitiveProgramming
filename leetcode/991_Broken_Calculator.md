@@ -68,3 +68,6 @@ Final result res is the number of doublings and the number of decreases
         res += sum(int(i) for i in diff[-doublings:])
     return res
 ```
+
+Time: O(logn)
+Space: O(1)
