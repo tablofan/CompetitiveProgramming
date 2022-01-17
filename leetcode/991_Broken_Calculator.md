@@ -61,7 +61,7 @@ Final result res is the number of doublings and the number of decreases
 ```python
     res = doublings
     #Adds decreases that happen **before** doubling
-    if diff[:-steps]:
+    if diff[:-doublings]:
         res += int(diff[:-doublings],2)
     #Adds decreases that happen **after** first doubling
     if diff[-doublings:]:
