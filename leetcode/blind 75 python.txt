@@ -1,0 +1,287 @@
+Two Sum
+class Solution:
+    def twoSum(self, nums: List[int], target: int) -> List[int]:
+        d = defaultdict()
+        for i,v in enumerate(nums):
+            if target - v in d:
+                return [d[target-v],i]
+            d[v] = i
+
+Best Time to Buy and Sell Stock
+class Solution:
+    def maxProfit(self, prices: List[int]) -> int:
+        lowestsofar = prices[0]
+        res = 0
+        for i in prices:
+            if i < lowestsofar:
+                lowestsofar = i
+            if i - lowestsofar > res:
+                res = i - lowestsofar
+        return res
+
+Contains Duplicate
+class Solution:
+    def containsDuplicate(self, nums: List[int]) -> bool:
+        return not len(set(nums)) == len(nums)
+
+Product of Array Except Self
+class Solution:
+    def productExceptSelf(self, nums: List[int]) -> List[int]:
+        p = 1
+        ans = []
+        for i in nums:
+            ans.append(p)
+            p*=i
+        p = 1
+        for i in range(len(nums)-1,-1,-1):
+            ans[i] *= p
+            p *= nums[i]
+        return ans
+
+Maximum Subarray
+class Solution:
+    def maxSubArray(self, nums: List[int]) -> int:
+        if max(nums) < 0:
+            return max(nums)
+        m = nums[0]
+        sumhere = 0
+        for i in nums:
+            sumhere += i
+            if sumhere < 0:
+                sumhere = 0
+            m = max(m,sumhere)
+        return m
+
+Maximum Product Subarray
+class Solution:
+    def maxProduct(self, nums: List[int]) -> int:
+        m = 0
+        p = 0
+        for i in nums:
+            if i:
+                if p:
+                    p*=i
+                else:
+                    p+=i
+            else:
+                p = 0
+            m = max(m,p)
+        p = 0
+        for i in nums[::-1]:
+            if i:
+                if p:
+                    p*=i
+                else:
+                    p+=i
+            else:
+                p = 0
+            m = max(m,p)
+        if m == 0:
+            m = max(nums)
+        return m
+
+Find Minimum in Rotated Sorted Array
+class Solution:
+    def findMin(self, nums: List[int]) -> int:
+        if nums[0]<nums[-1]:
+            return nums[0]
+        l = 0
+        r = len(nums)-1
+        m = (l+r)//2
+        while r>=l and nums[l] >nums[r]:
+            if m == r or m == l:
+                break
+            if nums[m]>nums[r]:
+                l = m
+                m = (l+r)//2
+            else:
+                r= m
+                m = (l+r)//2
+        return nums[r]
+
+Search in Rotated Sorted Array
+class Solution:
+    def search(self, nums, target):
+        if not nums:
+            return -1
+        low = 0
+        high = len(nums) - 1
+        while low <= high:
+            mid = (low + high) // 2
+            if target == nums[mid]:
+                return mid
+            if nums[low] <= nums[mid]:
+                if nums[low] <= target <= nums[mid]:
+                    high = mid - 1
+                else:
+                    low = mid + 1
+            else:
+                if nums[mid] <= target <= nums[high]:
+                    low = mid + 1
+                else:
+                    high = mid - 1
+        return -1
+
+3Sum
+class Solution:
+    def threeSum(self, nums: List[int]) -> List[List[int]]:
+        res = set()
+        n, p, z = [],[],[]
+        for i in nums:
+            if i>0:
+                n.append(i)
+            elif i<0:
+                p.append(i)
+            else:
+                z.append(i)
+        N, P = set(n), set(p)
+        if z:
+            for num in P:
+                if -1*num in N:
+                    res.add((-1*num, 0, num))
+        if len(z) >= 3:
+            res.add((0,0,0))
+        for i in range(len(n)):
+            for j in range(i+1,len(n)):
+                target = -1*(n[i]+n[j])
+                if target in P:
+                    res.add(tuple(sorted([n[i],n[j],target])))
+        for i in range(len(p)):
+            for j in range(i+1,len(p)):
+                target = -1*(p[i]+p[j])
+                if target in N:
+                    res.add(tuple(sorted([p[i],p[j],target])))
+        return res
+
+Container With Most Water
+class Solution:
+    def maxArea(self, height: List[int]) -> int:
+        max_area, i, j = 0, 0, len(height)-1
+        while i != j:
+            if height[j] > height[i]:
+                area = height[i] * (j - i)
+                i += 1
+            else:
+                area = height[j] * (j - i)
+                j -= 1
+            max_area = max(max_area, area)
+        return max_area
+
+Sum of Two Integers
+class Solution:
+    def getSum(self, a: int, b: int) -> int:
+        return sum((a,b))
+
+Number of 1 Bits
+class Solution:
+    def hammingWeight(self, n: int) -> int:
+        return sum(1 for i in bin(n) if i=='1')
+
+Counting Bits
+class Solution:
+    def countBits(self, n: int) -> List[int]:
+        res = []
+        for i in range(n+1):
+            res.append(sum(1 for k in bin(i) if k=="1"))
+        return res
+
+Missing Number
+class Solution:
+    def missingNumber(self, nums: List[int]) -> int:
+        return list(set(i for i in range(len(nums)+1))-set(nums))[0]
+
+Reverse Bits
+class Solution:
+    def reverseBits(self, n: int) -> int:
+        res = 0
+        for i in range(32):
+            res = (res<<1) + (n>>i &1)
+        return res
+
+Climbing Stairs
+class Solution:
+    def climbStairs(self, n: int) -> int:
+        @cache
+        def rec(n):
+            if not n:
+                return 0
+            if n == 1:
+                return 1
+            if n == 2:
+                return 2
+            return rec(n-1) + rec(n-2)
+        return rec(n)
+
+Coin Change
+Longest Increasing Subsequence
+Longest Common Subsequence
+Word Break Problem
+Combination Sum
+House Robber
+House Robber II
+Decode Ways
+Unique Paths
+Jump Game
+Clone Graph
+Course Schedule
+Pacific Atlantic Water Flow
+Number of Islands
+Longest Consecutive Sequence
+Alien Dictionary (Leetcode Premium)
+Graph Valid Tree (Leetcode Premium)
+Number of Connected Components in an Undirected Graph (Leetcode Premium)
+Insert Interval
+Merge Intervals
+Non-overlapping Intervals
+Meeting Rooms (Leetcode Premium)
+Meeting Rooms II (Leetcode Premium)
+Reverse a Linked List
+Detect Cycle in a Linked List
+Merge Two Sorted Lists
+Merge K Sorted Lists
+Remove Nth Node From End Of List
+Reorder List
+Set Matrix Zeroes
+Spiral Matrix
+Rotate Image
+Word Search
+
+Longest Substring Without Repeating Characters
+class Solution:
+    def lengthOfLongestSubstring(self, s: str) -> int:
+        m = 0
+        l = ""
+        for i in s:
+            if i not in l:
+                l+=i
+            else:
+                l = l[l.index(i)+1:]+i
+            m = max(m,len(l))
+        return m
+
+Longest Repeating Character Replacement
+Minimum Window Substring
+Valid Anagram
+Group Anagrams
+Valid Parentheses
+Valid Palindrome
+Longest Palindromic Substring
+Palindromic Substrings
+Encode and Decode Strings (Leetcode Premium)
+Maximum Depth of Binary Tree
+Same Tree
+Invert/Flip Binary Tree
+Binary Tree Maximum Path Sum
+Binary Tree Level Order Traversal
+Serialize and Deserialize Binary Tree
+Subtree of Another Tree
+Construct Binary Tree from Preorder and Inorder Traversal
+Validate Binary Search Tree
+Kth Smallest Element in a BST
+Lowest Common Ancestor of BST
+Implement Trie (Prefix Tree)
+Add and Search Word
+Word Search II
+Merge K Sorted Lists
+Top K Frequent Elements
+Find Median from Data Stream
