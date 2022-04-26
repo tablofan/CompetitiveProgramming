@@ -36,7 +36,7 @@ def main():
             if 0 <= r + a < n and 0 <= c + b < m and (r+a, c+b) not in v:
                 if (r+a,c+b) in covered:
 
-                q.append((r+a, c+b))
+                    q.append((r+a, c+b))
 
 
     return

@@ -1,0 +1,1 @@
+print('YES' if [sum(1 for i in j if i in 'aeiou') for j in [input(), input(), input()]] == [5,7,5] else 'NO')
