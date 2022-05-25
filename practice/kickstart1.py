@@ -25,12 +25,12 @@
 
 
 #H-Index
-def h_index(n, citations):
-    ans = []
-    # TODO: Complete the function to get the H-Index scores after each paper
-    for i,v in enumerate(citations):
-
-    return ans
+# def h_index(n, citations):
+#     ans = []
+#     # TODO: Complete the function to get the H-Index scores after each paper
+#     for i,v in enumerate(citations):
+#
+#     return ans
 
 
 if __name__ == '__main__':
