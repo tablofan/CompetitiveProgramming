@@ -108,29 +108,45 @@ int main(){
     int len1 = s1.length();
     vector<int> suf = buildSuffix(t,t.length());
     vector<int> lcp = buildLCP(t, suf);
+    vector<int> lce(lcp.size(),0);
+
+    int maxhere = 0;
+    for (int i=0;i<suf.size();i++){
+        if (suf[i] <= len1) maxhere = lcp[i];
+        else{
+            lce[i] = maxhere;
+            maxhere = min(maxhere,lcp[i]);
+        }
+    }
+    maxhere = 0;
+    for (int i=suf.size()-1;i>0;i--){
+        if (suf[i] <= len1) maxhere = lcp[i-1];
+        else{
+            lce[i] = max(maxhere,lce[i]);
+            maxhere = min(maxhere,lcp[i-1]);
+        }
+    }
+
+
     vector<int> s;
     vector<int> e;
     vector<int> l;
+    cout << "suf lcp lce    t" << endl;
     for (int i=0;i<suf.size();i++){
-        cout << suf[i] << " ";
+        cout << suf[i] << "    " << lcp[i] << "    " << lce[i] << "    " << t.substr(suf[i]) << endl;
     }
-    cout << "\n";
-    for (int i=0;i<lcp.size();i++){
-        cout << lcp[i] << " ";
-    }
-    
-    for (int i=2;i<lcp.size()-1;i++){
-        if ((suf[i]>len1 && suf[i+1] < len1) || (suf[i]<len1 && len1<suf[i+1])){
-            // if (lcp[i]!=0){
-                s.push_back(max(suf[i],suf[i+1])-len1-1);
-                e.push_back(max(suf[i],suf[i+1])-len1-1+lcp[i]);
-                l.push_back(lcp[i]-1);
-            // }
+
+    for (int i=0;i<lce.size();i++){
+        if (lce[i]>1){
+            s.push_back(suf[i]-len1-1);
+            e.push_back(suf[i]-len1-1+lce[i]);
+            l.push_back(lce[i]-1);
         }
     }
-    for (int i=0;i<s.size();i++){
-        cout << "(" << s[i] << " " << e[i] << " " << l[i] << ") ";
-    }
+    // cout << "start end profit" << endl;
+    // for (int i=0;i<s.size();i++){
+    //     cout << "(" << s[i] << " " << e[i] << " " << l[i] << ")\n";
+    // }
     vector<int> v(s2.length()+1,0);
     cout<<s2.length()-dp(s,e,l);
     return 0;

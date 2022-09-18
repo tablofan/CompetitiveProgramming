@@ -1,0 +1,37 @@
+bool myComparison(const pair<int,int> &a,const pair<int,int> &b)
+{
+       return a.second<b.second;
+}
+int getMaxSubstrings(string s, int k) {
+    vector<pair<int,int>> pali;
+    for (int i=0;i<s.length();i++){
+        int l = 0;
+        while (i+l<s.length() && i-l>=0 && s[i+l]==s[i-l]){
+            if (2*l+1 >= k){
+                pali.push_back({i-l,i+l});
+                break;
+            }
+            l++;
+        }
+        if (s[i]==s[i+1] && i!=s.length()-1){
+            int l = 0;
+            while (i+l+1<s.length() && i-l>=0 && s[i+1+l]==s[i-l]){
+                if (2*l+2 >= k){
+                    pali.push_back({i-l,i+1+l});
+                    break;
+                }
+            l++;
+            }
+        }
+        }
+    sort(pali.begin(),pali.end(),myComparison);
+    int res = 0;
+    int curr = -1;
+    for (auto &i:pali){
+        if (i.first>curr){
+            curr = i.second;
+            res++;
+        }
+    }
+    return res;
+}
