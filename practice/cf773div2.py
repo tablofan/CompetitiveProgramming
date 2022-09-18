@@ -74,6 +74,6 @@ for _ in range(int(input())):
                 t = nums.popleft()
                 seen.add(t)
                 curr.append(t)
-            elif not r:
-                k = len(curr)
-                if nums[0]==curr[0]:
+            # elif not r:
+            #     k = len(curr)
+            #     if nums[0]==curr[0]:
